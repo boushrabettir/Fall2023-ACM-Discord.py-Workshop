@@ -50,7 +50,7 @@ def get_game(
     # with it in our code
     assert channel_id is not None
 
-    game_state = game_channels.get(channel_id)
+    game_state: GameState = game_channels.get(channel_id)
     # If there is a channel that doesnt have a game running
     if game_state is None:
         # If we want to create a new game, create a new game state with the
@@ -59,7 +59,7 @@ def get_game(
             game_state = GameState()
             game_channels[channel_id] = game_state
         else:
-            return None
+            return game_state
 
     if game_state.is_ended():
         return None

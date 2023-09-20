@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 
-from game import get_game, Question
+from game import get_game, Question, get_question_embed
 from pyopentdb import OpenTDBClient, Category, QuestionType, Difficulty
 
 
@@ -16,7 +16,7 @@ async def on_ready():
 
 @bot.tree.command(name="join")
 async def join(interaction: discord.Interaction):
-    new_game_state = get_game(interaction, create=True)
+    new_game_state = get_game(interaction.channel_id, create=True)
 
     if interaction.user.name not in new_game_state.scores:
         new_game_state.scores[interaction.user.name] = 0
@@ -53,13 +53,13 @@ async def join(interaction: discord.Interaction):
     ]
 )
 async def start(
-    interaction,
+    interaction: discord.Interaction,
     amount: str = "5",
     difficulty: str = Difficulty.EASY.name,
     category: str = Category.SCIENCE_COMPUTERS.name,
 ):
-    game_state = get_game(interaction)
-
+    game_state = get_game(interaction.channel_id)
+    print(game_state)
     game_state.is_running = True
 
     client = OpenTDBClient()
@@ -90,7 +90,7 @@ async def start(
     ]
 )
 async def answer(interaction, answer: discord.app_commands.Choice[str]):
-    game_state = get_game(interaction)
+    game_state = get_game(interaction.channel_id)
 
     embed = []
 
