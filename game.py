@@ -38,7 +38,7 @@ class GameState:
 game_channels: dict[int, GameState] = {}
 
 
-def must_get_game(
+def get_game(
     channel_id: int | None,
     create=False,
 ) -> GameState | None:

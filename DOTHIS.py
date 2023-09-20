@@ -1,8 +1,5 @@
-import os
-from typing import List, Dict
 import discord
 import game
-from dataclasses import dataclass
 
 
 # cool little embed for when game is not found
