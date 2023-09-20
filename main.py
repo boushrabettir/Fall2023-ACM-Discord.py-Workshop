@@ -11,6 +11,11 @@ from discord.ext import commands
 from game import get_game, Question
 from pyopentdb import OpenTDBClient, Category, QuestionType, Difficulty
 
+
+from bot import get_question_embed
+
+
+
 # Load the .env file, if it exists, so that os.getenv() can read the environment
 # variable in it.
 load_dotenv()
